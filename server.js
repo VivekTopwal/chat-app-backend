@@ -12,10 +12,12 @@ const app = express();
 const server = http.createServer(app);
 const uploadRoutes = require('./routes/upload');
 
+
+const APP_URL = process.env.FRONTEND_URL;
 // For Socket.IO
 const io = socketIo(server, {
   cors: {
-    origin: ["https://mychatapp.com"], // Replace with your production frontend URL
+    origin: [`${APP_URL}`], 
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -23,7 +25,7 @@ const io = socketIo(server, {
 
 // For Express middleware
 app.use(cors({
-  origin: ["https://mychatapp.com"], // Replace with your production frontend URL
+  origin:[`${APP_URL}`],
   credentials: true
 }));
 
